@@ -1,6 +1,7 @@
 from model.Tweet import Tweet
 import tweepy
 import os
+import json
 
 CONSUMER_KEY 		= os.environ['CONSUMER_KEY']
 CONSUMER_SECRET 	= os.environ['CONSUMER_SECRET']
@@ -29,4 +30,4 @@ class TweetController(object):
 	def get_tweets(self):
 		pub_tweets = self.api.home_timeline()
 		f = open(os.path.dirname(__file__)  + "/../tweets.json", "w")
-		f.write(str(pub_tweets))
+		f.write(json.dumps(pub_tweets))
