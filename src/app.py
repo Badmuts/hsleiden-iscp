@@ -1,9 +1,9 @@
-from controller.TweetController import TweetController
+import router
 
 class App(object):
 	def run(self):
-		tweetCtrl = TweetController()
-		tweetCtrl.start_stream(['#LIVMUN']);
+		route = router.Router()
+		route.run()		
 
 if __name__ == "__main__":
 	app = App()

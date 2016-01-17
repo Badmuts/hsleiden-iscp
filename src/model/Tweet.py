@@ -1,6 +1,6 @@
 class Tweet(object):
 	tweet = ""
-	datetime = 0
+	datetime = ""
 	user = ""
 
 	def __init__(self, tweet, datetime, user):

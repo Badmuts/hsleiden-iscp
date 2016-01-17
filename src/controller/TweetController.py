@@ -9,18 +9,6 @@ CONSUMER_SECRET 	= os.environ['CONSUMER_SECRET']
 ACCESS_TOKEN 		= os.environ['ACCESS_TOKEN']
 ACCESS_TOKEN_SECRET = os.environ['ACCESS_TOKEN_SECRET']
 
-if CONSUMER_KEY == "":
-	print("ERROR: Please set your CONSUMER_KEY as env variable")
-
-if CONSUMER_SECRET == "":
-	print("ERROR: Please set your CONSUMER_SECRET as env variable")
-
-if ACCESS_TOKEN == "":
-	print("ERROR: Please set your ACCESS_TOKEN as env variable")
-
-if ACCESS_TOKEN_SECRET == "":
-	print("ERROR: Please set your ACCESS_TOKEN_SECRET as env variable")
-
 class TweetController(object):
 
 	def __init__(self):
@@ -37,3 +25,10 @@ class TweetController(object):
 		self.tweet_listener = Listener()
 		self.stream = tweepy.Stream(auth = self.auth, listener=self.tweet_listener)
 		self.stream.filter(track=keywords, async=True)
+
+	def list_tweets(self):
+		f = open(os.path.dirname(__file__)  + "/../tweets.json")
+		return f.read()
+
+	def stop_stream(self):
+		self.stream.disconnect()
