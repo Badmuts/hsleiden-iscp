@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tweet sentiment</title>
+	<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+	<div class="container">
+		<img src="/static/logo.png" alt="" class="twitter-logo">
+
+		<div class="form-group cf">
+			
+			<div class="input-field">
+				<label class="cf">hashtag</label>
+				<div class="hashtag-symbol">#</div>
+				<div class="input hashtag" contenteditable="true">MUFC</div>
+			</div>
+
+			<div class="input-field">
+				<label class="cf">limit</label>
+				<div class="input" contenteditable="true">15000</div>
+			</div>
+
+			<div class="input-field input-btn">
+				<button type="button">
+					Go!
+					<span class="loader hide"></span>
+				</button>
+			</div>
+
+		</div>
+
+		<div class="cf"></div>
+
+		<div class="results cf">
+			<div class="result">
+				<div class="label">analyzed</div>
+				<h1>-</h1>
+			</div>
+
+			<div class="result">
+				<div class="label">mood</div>
+				<h1 class="neu">-</h1>
+			</div>
+
+		</div>
+	</div>
+
+	<script>
+		(function() {
+			'use strict';
+
+			var btn = document.querySelectorAll('button')[0];
+			var loader = document.querySelectorAll('.loader')[0]
+			btn.addEventListener('click', function (event) {
+				loader.className = 'loader';
+				console.log('click', loader);
+			});
+		})();
+	</script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 from controller.TweetController import TweetController
-from flask import Flask
+from flask import Flask, render_template
 import json
 import time
 
@@ -11,6 +11,10 @@ class Router(object):
 		tweetCtrl = TweetController()
 		tweetCtrl.start_stream(keywords=["#LIVMUN"])
 		return "Good game, retrieved tweets for 10 seconds"
+
+	@server.route("/kaas")
+	def kaas():
+		return render_template('index.html')
 
 	def run(self):
 		server.run(debug=True)
