@@ -52,9 +52,11 @@
 		if (resp[2] >= getLimit()) {
 			console.log('clear interval')
 			clearInterval(interval);
+			isAnalyzing = false;
 			hideLoader();
 		} else if (resp[1] === "inactive") {
 			clearInterval(interval);
+			isAnalyzing = false;
 			hideLoader();
 		}
 	}
