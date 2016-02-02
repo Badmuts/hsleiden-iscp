@@ -17,8 +17,8 @@ class Listener(tweepy.StreamListener):
 
 	def on_status(self, status):
 		if self.get_status() == "active":
-			print("Tweet recieved")
 			self.tweets.append(self.create_tweet(status))
+			# TODO: Analyze tweet
 			self.count += 1
 			self.save_count()
 			return True
