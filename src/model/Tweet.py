@@ -2,10 +2,10 @@ class Tweet(object):
 	tweet = ""
 	datetime = ""
 	user = ""
+	sentiment = ""
 
 	def __init__(self, tweet, datetime, user):
 		"""Creates a Tweet object containing a tweet."""
-		super(Tweet, self).__init__()
 		self.tweet = tweet
 		self.datetime = datetime
 		self.user = user
@@ -33,6 +33,12 @@ class Tweet(object):
 	def setUser(self, user):
 		"""Set the user of the tweet"""
 		self.user = user
+
+	def get_sentiment(self):
+		return sentiment
+
+	def set_sentiment(self, sentiment):
+		self.sentiment = sentiment
 
 	def printTweet(self):
 		"""Utility method used to print the tweet"""

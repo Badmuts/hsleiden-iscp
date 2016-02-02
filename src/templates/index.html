@@ -19,7 +19,7 @@
 
 			<div class="input-field">
 				<label class="cf">limit</label>
-				<div class="input" contenteditable="true">15000</div>
+				<div class="input" id="limit" contenteditable="true">15000</div>
 			</div>
 
 			<div class="input-field input-btn">
@@ -36,28 +36,17 @@
 		<div class="results cf">
 			<div class="result">
 				<div class="label">analyzed</div>
-				<h1>15000</h1>
+				<h1 id="analyzed">15000</h1>
 			</div>
 
 			<div class="result">
 				<div class="label">average mood</div>
-				<h1 class="pos">POS</h1>
+				<h1 class="pos" id="mood">POS</h1>
 			</div>
 
 		</div>
 	</div>
-
-	<script>
-		(function() {
-			'use strict';
-
-			var btn = document.querySelectorAll('button')[0];
-			var loader = document.querySelectorAll('.loader')[0]
-			btn.addEventListener('click', function (event) {
-				loader.className = 'loader';
-				console.log('click', loader);
-			});
-		})();
-	</script>
+	
+	<script src="/static/app.js"></script>
 </body>
 </html>
