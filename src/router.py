@@ -1,7 +1,5 @@
 from controller.TweetController import TweetController
 from flask import Flask
-import json
-import time
 
 server = Flask("iscp")
 
