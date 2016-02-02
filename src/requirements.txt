@@ -1,6 +1,7 @@
 Flask==0.10.1
 itsdangerous==0.24
 Jinja2==2.8
+jsonstruct==0.2a1
 MarkupSafe==0.23
 oauthlib==1.0.3
 requests==2.8.1

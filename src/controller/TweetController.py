@@ -3,17 +3,18 @@ import tweepy
 import os
 import json
 from service.Listener import Listener
+import app
 
-CONSUMER_KEY 		= os.environ['CONSUMER_KEY']
-CONSUMER_SECRET 	= os.environ['CONSUMER_SECRET']
-ACCESS_TOKEN 		= os.environ['ACCESS_TOKEN']
-ACCESS_TOKEN_SECRET = os.environ['ACCESS_TOKEN_SECRET']
+# CONSUMER_KEY 		= os.environ['CONSUMER_KEY']
+# CONSUMER_SECRET 	= os.environ['CONSUMER_SECRET']
+# ACCESS_TOKEN 		= os.environ['ACCESS_TOKEN']
+# ACCESS_TOKEN_SECRET = os.environ['ACCESS_TOKEN_SECRET']
 
 class TweetController(object):
 
-	def __init__(self):
-		self.auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-		self.auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
+	def __init__(self):		
+		self.auth = tweepy.OAuthHandler(app.config["consumer_key"], app.config["consumer_secret"])
+		self.auth.set_access_token(app.config["access_token"], app.config["access_token_secret"])
 		self.api = tweepy.API(self.auth, parser=tweepy.parsers.JSONParser())
 
 	def get_tweets(self):

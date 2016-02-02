@@ -1,0 +1,131 @@
+body {
+	font-family: 'Avenir Next';
+	background-color: #192736;
+}
+
+.container {
+	margin: 0 auto;
+	width: 960px;
+}
+
+.twitter-logo {
+	display: block;
+	margin: 40px auto;
+	width: 54px;
+}
+
+.form-group {
+	height: 70px;
+	border-bottom: 1px solid #445664;
+	margin-bottom: 40px;
+}
+
+.form-group > div {
+	float: left;
+}
+
+label {
+	color: #394A58;
+	font-size: 13px;
+}
+
+.input,
+.hashtag-symbol {
+	color: #394A58;
+	font-size: 37px;
+	outline: none;
+}
+
+.hashtag-symbol {
+	/*color: #000;*/
+}
+
+.input-field {
+	width: 43.97%;
+}
+
+button {
+	position: relative;
+	border: 0;
+	background-color: #243D55;
+	color: #ffffff;
+	padding: 13px 47px;
+	/*border-radius: 4px;*/
+	font-size: 13px;
+	cursor: pointer;
+	outline: none;
+}
+
+button:hover {
+	background-color: #1D3449;
+}
+
+.input-field > div {
+	float: left;
+}
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+.input-btn {
+	margin-top: 29px;
+	width: auto;
+}
+
+.hashtag {
+	color: #00A1F5;
+}
+
+h1 {
+	font-size: 146px;
+	font-weight: 600;
+	color: #243241;
+	margin: 0;
+	line-height: 1;
+}
+
+.result {
+	width: 50%;
+	float: left;
+}
+
+.pos {color: #47E4C2;}
+.neu {color: #FFFFFF;}
+.neg {color: #E54D88;}
+.label {color: #FFFFFF;}
+
+.hide {display: none;}
+
+.loader:after {
+	content: '';
+	position: absolute;
+	top: 14px;
+	right: 20px;
+	display: block;
+	width: 12px;
+	height: 12px;
+	border-radius: 12px;
+	border: 1px solid #fff;
+	border-top: 0.1em solid transparent;
+	animation-duration: 1s;
+  	animation-name: rotate;
+  	animation-iteration-count: infinite;
+  	animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
