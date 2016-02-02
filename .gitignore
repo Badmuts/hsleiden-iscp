@@ -1,4 +1,4 @@
 *.pyc
 venv/
 tweets.json
-config.json
+src/config.json
