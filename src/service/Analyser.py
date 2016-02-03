@@ -39,6 +39,5 @@ class Analyser(object):
 		text = text.strip('\'"')
 		# Split text to array
 		text = text.split()
-		print(text)
 		return text
 
