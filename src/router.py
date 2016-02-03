@@ -1,6 +1,6 @@
 from controller.TweetController import TweetController
 from flask import Flask, render_template, request, session, Response
-import urllib
+import urllib.parse
 import jsonstruct
 
 server = Flask("iscp")
@@ -9,7 +9,7 @@ class Router(object):
 	@server.route("/start_stream")
 	def start_stream():
 		keywords = []
-		keywords.append(urllib.unquote(request.args.get('keyword')).decode('utf8'))
+		keywords.append(urllib.parse.unquote(request.args.get('keyword')).decode('utf8'))
 		tweetCtrl = TweetController(server)
 		tweetCtrl.start_stream(keywords=keywords)
 		return "stream started"
