@@ -6,9 +6,9 @@ It visualises the analysis to a webpage served via Flask which automatically upd
 ![Webpage](https://www.dropbox.com/s/rvhsl7nf9audfy5/Screen%20Shot%202016-01-29%20at%2022.29.57.png?dl=1)
 
 # Installation
-Install the requirments using pip
+Install the requirements using pip
 ```
-$ pip install -r requirments.txt
+$ pip install -r requirements.txt
 ```
 Create a config.json file in the `src` folder:
 ```
