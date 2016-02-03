@@ -15,6 +15,7 @@ class TweetController(object):
 		self.api = tweepy.API(self.auth, parser=tweepy.parsers.JSONParser())
 		self.server = server
 		self.conn = sqlite3.connect(os.path.dirname(__file__)  + "/../../iscp.db", check_same_thread=False)
+		self.create_table_if_not_exist()
 
 	def get_tweets(self):
 		pub_tweets = self.api.home_timeline()
@@ -44,3 +45,9 @@ class TweetController(object):
 		cursor.execute("SELECT * FROM stream_status WHERE id = 1")
 		result = cursor.fetchall()
 		return result[0]
+
+	def create_table_if_not_exist(self):
+		cursor = self.conn.cursor()
+		cursor.execute("CREATE TABLE IF NOT EXISTS `stream_status` (`id` INTEGER PRIMARY KEY AUTOINCREMENT,`status`	TEXT,`tweets_retrieved`	INTEGER,`avg_mood` TEXT, `pos_tweets` INTEGER, `neg_tweets` INTEGER, `neu_tweets` INTEGER)")
+		cursor.execute("INSERT OR IGNORE INTO `stream_status`(`id`, `status`, `tweets_retrieved`,`avg_mood`, `pos_tweets`, `neg_tweets`, `neu_tweets`) VALUES(1, 'inactive', 0, 'neu', 0, 0, 0)")
+		self.conn.commit()

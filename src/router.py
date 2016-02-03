@@ -9,7 +9,7 @@ class Router(object):
 	@server.route("/start_stream")
 	def start_stream():
 		keywords = []
-		keywords.append(urllib.unquote(request.args.get('keyword')).decode('utf8') )
+		keywords.append(urllib.unquote(request.args.get('keyword')).decode('utf8'))
 		tweetCtrl = TweetController(server)
 		tweetCtrl.start_stream(keywords=keywords)
 		return "stream started"

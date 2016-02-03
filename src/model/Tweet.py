@@ -9,6 +9,7 @@ class Tweet(object):
 		self.tweet = tweet
 		self.datetime = datetime
 		self.user = user
+		self.sentiment = ''
 
 	def getTweet(self):
 		"""Return the tweet"""
@@ -35,7 +36,7 @@ class Tweet(object):
 		self.user = user
 
 	def get_sentiment(self):
-		return sentiment
+		return self.sentiment
 
 	def set_sentiment(self, sentiment):
 		self.sentiment = sentiment

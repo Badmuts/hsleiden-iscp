@@ -4,6 +4,7 @@ import json
 from model.Tweet import Tweet 
 import jsonstruct
 import sqlite3
+from service.Analyser import Analyser
 
 class Listener(tweepy.StreamListener):	
 
@@ -14,12 +15,15 @@ class Listener(tweepy.StreamListener):
 		self.tweets = []
 		self.app = app
 		self.conn = sqlite3.connect(os.path.dirname(__file__)  + "/../../iscp.db", check_same_thread=False)
+		self.analyser = Analyser()
 
 	def on_status(self, status):
 		if self.get_status() == "active":
-			self.tweets.append(self.create_tweet(status))
-			# TODO: Analyze tweet
 			self.count += 1
+			tweet = self.create_tweet(status)
+			self.analyser.analyse(tweet)
+			self.tweets.append(tweet)
+			self.save_avg_mood()
 			self.save_count()
 			return True
 		self.save_tweets()
@@ -38,7 +42,6 @@ class Listener(tweepy.StreamListener):
 
 	def save_tweets(self):
 		f = open(os.path.dirname(__file__) + self.save_location, "w")
-		# for tweet in self.tweets:
 		f.write(jsonstruct.encode(self.tweets))
 		f.close()
 
@@ -51,4 +54,35 @@ class Listener(tweepy.StreamListener):
 	def save_count(self):
 		cursor = self.conn.cursor()
 		cursor.execute("UPDATE stream_status SET tweets_retrieved=? WHERE id = 1", (self.count,))
+		self.conn.commit()
+
+	def save_avg_mood(self):
+		pos_tweets = 0
+		neg_tweets = 0
+		neu_tweets = 0
+		mood = ''
+		for tweet in self.tweets:
+			if tweet.get_sentiment() == 'pos':
+				pos_tweets = pos_tweets + 1
+			elif tweet.get_sentiment() == 'neg':
+				neg_tweets = neg_tweets + 1
+			else:
+				neu_tweets = neu_tweets + 1
+		if pos_tweets > neg_tweets and pos_tweets > neu_tweets:
+			mood = 'pos'
+		elif neg_tweets > pos_tweets and neg_tweets > neu_tweets:
+			mood = 'neg'
+		else:
+			mood = 'neu'
+		self.save_sent_count(pos_tweets, neg_tweets, neu_tweets)
+		self.save_mood(mood);
+
+	def save_mood(self, mood):
+		cursor = self.conn.cursor()
+		cursor.execute("UPDATE stream_status SET avg_mood=? WHERE id = 1", (mood,))
+		self.conn.commit()
+
+	def save_sent_count(self, pos, neg, neu):
+		cursor = self.conn.cursor()
+		cursor.execute("UPDATE stream_status SET pos_tweets=?, neg_tweets=?, neu_tweets=? WHERE id = 1", (pos, neg, neu))
 		self.conn.commit()
