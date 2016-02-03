@@ -16,7 +16,7 @@ class Analyser(object):
 			if word in self.positive_words:
 				score += 0.5
 			if word in self.positive_words:
-				score += 0.4
+				score -= 0.4
 		if score <= -0.5:
 			tweet.set_sentiment("neg")
 		elif score >= 0.5:
