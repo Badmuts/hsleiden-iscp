@@ -24,6 +24,7 @@ class TweetController(object):
 
 	def start_stream(self, keywords):
 		self.set_status("active")
+		self.reset_status()
 		self.tweet_listener = Listener(app = self.server)
 		self.stream = tweepy.Stream(auth = self.auth, listener=self.tweet_listener)
 		self.stream.filter(track=keywords, async=True)
@@ -50,4 +51,9 @@ class TweetController(object):
 		cursor = self.conn.cursor()
 		cursor.execute("CREATE TABLE IF NOT EXISTS `stream_status` (`id` INTEGER PRIMARY KEY AUTOINCREMENT,`status`	TEXT,`tweets_retrieved`	INTEGER,`avg_mood` TEXT, `pos_tweets` INTEGER, `neg_tweets` INTEGER, `neu_tweets` INTEGER)")
 		cursor.execute("INSERT OR IGNORE INTO `stream_status`(`id`, `status`, `tweets_retrieved`,`avg_mood`, `pos_tweets`, `neg_tweets`, `neu_tweets`) VALUES(1, 'inactive', 0, 'neu', 0, 0, 0)")
+		self.conn.commit()
+
+	def reset_status(self):
+		cursor = self.conn.cursor()
+		cursor.execute("UPDATE stream_status SET tweets_retrieved=?, avg_mood=?, pos_tweets=?, neg_tweets=?, neu_tweets=?", (0, 'neu', 0, 0, 0,))
 		self.conn.commit()
