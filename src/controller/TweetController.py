@@ -23,8 +23,8 @@ class TweetController(object):
 		f.write(json.dumps(pub_tweets))
 
 	def start_stream(self, keywords):
-		self.set_status("active")
 		self.reset_status()
+		self.set_status("active")
 		self.tweet_listener = Listener(app = self.server)
 		self.stream = tweepy.Stream(auth = self.auth, listener=self.tweet_listener)
 		self.stream.filter(track=keywords, async=True)
@@ -55,5 +55,5 @@ class TweetController(object):
 
 	def reset_status(self):
 		cursor = self.conn.cursor()
-		cursor.execute("UPDATE stream_status SET tweets_retrieved=?, avg_mood=?, pos_tweets=?, neg_tweets=?, neu_tweets=?", (0, 'neu', 0, 0, 0,))
-		self.conn.commit()
+		cursor.execute("UPDATE stream_status SET tweets_retrieved=?, avg_mood=?, pos_tweets=?, neg_tweets=?, neu_tweets=? WHERE id = 1", (0, 'neu', 0, 0, 0,))
+		self.conn.commit()		

@@ -41,6 +41,10 @@
 		}
 		showLoader();
 
+		// if (parseInt(analyzed.textContent) > 0) {
+		// 	analyzed.textContent = 0;
+		// }
+
 		var xhrStartStream = new XMLHttpRequest();
 		var keyword = encodeURIComponent(keywordInput.textContent)
 		xhrStartStream.addEventListener('load', function() {
@@ -74,6 +78,7 @@
 			clearInterval(interval);
 			isAnalyzing = false;
 			hideLoader();
+			stopStream();
 		} else if (resp[1] === "inactive") {
 			clearInterval(interval);
 			isAnalyzing = false;
@@ -98,5 +103,11 @@
 
 	function getLimit() {
 		return parseInt(limitInput.textContent);
+	}
+
+	function stopStream() {
+		var stopStream = new XMLHttpRequest();
+			stopStream.open("GET", "/stop_stream");
+			stopStream.send()
 	}
 })();

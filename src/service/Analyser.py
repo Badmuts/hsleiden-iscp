@@ -2,8 +2,8 @@ import re
 
 class Analyser(object):
 	
-	positive_words = ["cool", "awesome", "great", "incredible", "wow", "amazing", "good", "happy", "goal", "right", "love", "loved", "more", "perfect", "best", "won", "win", "epic", "congrats", "better", "biggest", "remarkable", "will", "does", "like"]
-	negative_words = ["not", "bad", "lousy", "worthless", "wtf", "angry", "mad", "missed", "miss", "wrong", "hate", "hated", "less", "lost", "worst", "smallest", "atrocious", "horrifyingly", "poor", "horrifying", "rubbish", "shagged", "doesn't", "won't", "fraud", "doubt", "doubts"]
+	positive_words = ["cool", "awesome", "great", "incredible", "wow", "amazing", "good", "happy", "goal", "right", "love", "loved", "more", "perfect", "best", "won", "win", "epic", "congrats", "better", "biggest", "remarkable", "will", "does", "like", "heaven", "haha", "hahaha", "lol", "laugh", "laughing"]
+	negative_words = ["not", "bad", "lousy", "worthless", "wtf", "angry", "mad", "missed", "miss", "wrong", "hate", "hated", "less", "lost", "worst", "smallest", "atrocious", "horrifyingly", "poor", "horrifying", "rubbish", "shagged", "doesn't", "won't", "fraud", "doubt", "doubts", "dead", "die", "hell", "cruel", "criminal", "shooting"]
 	neutral_words  = ["ok", "okay", "oke", "hmm", "mmh", "absolutely", "only", "maybe"]
 
 	def __init__(self):
@@ -14,9 +14,9 @@ class Analyser(object):
 		score = 0
 		for word in processed_text:
 			if word in self.positive_words:
-				score += 0.5
-			if word in self.positive_words:
-				score -= 0.4
+				score += 0.6
+			if word in self.negative_words:
+				score -= 0.5
 		if score <= -0.5:
 			tweet.set_sentiment("neg")
 		elif score >= 0.5:

@@ -16,8 +16,10 @@ class Listener(tweepy.StreamListener):
 		self.app = app
 		self.conn = sqlite3.connect(os.path.dirname(__file__)  + "/../../iscp.db", check_same_thread=False)
 		self.analyser = Analyser()
+		print("Listener created")
 
 	def on_status(self, status):
+		print("Tweet recieved")
 		if self.get_status() == "active":
 			self.count += 1
 			tweet = self.create_tweet(status)
@@ -34,13 +36,18 @@ class Listener(tweepy.StreamListener):
 		Disconnect codes are listed here:
 		https://dev.twitter.com/docs/streaming-apis/messages#Disconnect_messages_disconnect
 		"""
+		print("disconnected")
 		self.save_tweets()
 		return
+
+	def on_error(self, status_code):
+		print(str(status_code))
 
 	def create_tweet(self, status):
 		return Tweet(status.text.encode("utf8"), str(status.created_at), status.user.screen_name)
 
 	def save_tweets(self):
+		print("Saving tweets to tweets.json")
 		f = open(os.path.dirname(__file__) + self.save_location, "w")
 		f.write(jsonstruct.encode(self.tweets))
 		f.close()
