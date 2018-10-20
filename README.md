@@ -3,7 +3,7 @@ Real basic Python Twitter sentiment analysis. It uses the Twitter streaming API 
 
 It visualises the analysis to a webpage served via Flask which automatically updates every 300ms (DDOS incoming).
 
-![Webpage](https://www.dropbox.com/s/rvhsl7nf9audfy5/Screen%20Shot%202016-01-29%20at%2022.29.57.png?dl=1)
+![Webpage](https://www.dropbox.com/s/rvhsl7nf9audfy5/Screen%20Shot%202016-01-29%20at%2022.29.57.png?raw=1)
 
 # Installation
 Install the requirements using pip
